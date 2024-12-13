@@ -3,20 +3,3 @@
 Element Quest is a text-based RPG where players can explore different locations, battle enemies, and level up their character. Allocate stat points to enhance abilities such as `Attack`, `Magic`, and `Defense`. Progress through the game by defeating enemies, gaining experience points (EXP), and customizing your character. 
 
 The game also includes a shortcut management system with the `.edit` command to make gameplay more convenient.
-
-## Installation
-1. Clone the repository to your local machine:
-   ```bash
-   git clone https://github.com/DevLimeGames/ElementQuest.git
-
-2. Navigate to the project directory:
-
-cd ElementQuest/Main
-
-
-3. Ensure Python 3.x is installed on your system.
-
-
-4. Run the game:
-
-python game.py
