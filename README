@@ -1,5 +1,0 @@
-# Element Quest - Version 0.1.0
-
-Element Quest is a text-based RPG where players can explore different locations, battle enemies, and level up their character. Allocate stat points to enhance abilities such as `Attack`, `Magic`, and `Defense`. Progress through the game by defeating enemies, gaining experience points (EXP), and customizing your character. 
-
-The game also includes a shortcut management system with the `.edit` command to make gameplay more convenient.
