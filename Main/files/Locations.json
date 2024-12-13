@@ -1,0 +1,49 @@
+{
+    "locations": [
+        {
+            "name": "Starter Island",
+            "mobs": [
+                {
+                    "name": "Bandit",
+                    "level": 5,
+                    "type": [
+                        "normal"
+                    ]
+                },
+                {
+                    "name": "Thief",
+                    "level": 10,
+                    "type": [
+                        "normal"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Arcane City",
+            "mobs": [
+                {
+                    "name": "Fire Mage",
+                    "level": 15,
+                    "type": [
+                        "normal"
+                    ]
+                },
+                {
+                    "name": "Water Mage",
+                    "level": 25,
+                    "type": [
+                        "normal"
+                    ]
+                },
+                {
+                    "name": "Steam Mage",
+                    "level": 30,
+                    "type": [
+                        "Boss"
+                    ]
+                }
+            ]
+        }
+    ]
+}
