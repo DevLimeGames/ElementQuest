@@ -73,16 +73,15 @@ class Character:
         
         while True:
             health -= self.stats['Attack'] + self.stats['Magic']
-            
-            if health <= 0:
-                self.win_against(mob)
-                break
-            
             self.health -= mob.level / 4
             
             if self.health <= 0:
                 break
             
+            if health <= 0:
+                self.win_against(mob)
+                break
+                
             print(f'Your Health: {self.health}')
             print(f'Enemy Health: {health}')
             
@@ -106,21 +105,24 @@ class Character:
         return exp_gained
         
 class Enemy:
-    def __init__(self, name, level, type):
+    def __init__(self, name, level, lvl_need, type):
         self.name = name
         self.level = level
+        self.level_needed = lvl_need
         self.type = type
     
     def return_json(self):
         return {
             'name': self.name,
             'level': self.level,
+            'lvl_need': self.level_needed,
             'type': self.type
         }
     
     def update_json(self, data):
         self.name = data['name']
         self.level = data['level']
+        self.level_needed = data['lvl_need']
         self.type = data['type']
 
 class Location:
@@ -146,7 +148,7 @@ class Location:
         self.name = data['name']
         self.mobs = []
         for mob_data in data['mobs']:
-            self.mobs.append(Enemy(mob_data['name'], mob_data['level']))
+            self.mobs.append(Enemy(mob_data['name'], mob_data['level'], mob_data['lvl_need'], mob_data['type']))
 
 class Game:
     def __init__(self):
@@ -167,7 +169,7 @@ class Game:
             with open(file_path, 'r') as file:
                 data = json.load(file)
                 for location_data in data['locations']:
-                    mobs = [Enemy(mob['name'], mob['level'], mob['type']) for mob in location_data['mobs']]
+                    mobs = [Enemy(mob['name'], mob['level'], mob['lvl_need'], mob['type']) for mob in location_data['mobs']]
                     location = Location(location_data['name'], mobs)
                     locations.append(location)
         else:
@@ -180,7 +182,7 @@ class Game:
         
         available = []
         for mob in self.player.location.mobs:
-            print(f'{mob.name}: {mob.level} ({",".join(mob.type)})')
+            print(f'{mob.level_needed} - {mob.name}: {mob.level} ({",".join(mob.type)})')
             available.append(mob.name.lower())
             
         print('')
@@ -188,8 +190,11 @@ class Game:
         
         if select.lower() in available:
             for mob in self.player.location.mobs:
-                if mob.name.lower() == select.lower():            
-                    self.player.fight(mob)
+                if mob.name.lower() == select.lower():
+                    if self.player.level >= mob.level_needed:       
+                        self.player.fight(mob)
+                    else:
+                        print('Low Level cannot fight this mob')
     
     @readability
     def travel(self):
